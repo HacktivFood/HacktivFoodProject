@@ -8,9 +8,11 @@ function checkAuth() {
     if (localStorage.getItem('token')) {
         $('#login-page').hide()
         $('#home-page').show()
+        $('#fetch-recipes').show()
     } else {
         $('#login-page').show()
         $('#home-page').hide()
+        $('#fetch-recipes').hide()
     }
 }
 

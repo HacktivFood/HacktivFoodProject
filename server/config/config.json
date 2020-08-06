@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "postgres",
-    "password": "user",
+    "password": "postgres",
     "database": "hacktivfood_db",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "port": 5433
   }
 }

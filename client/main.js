@@ -31,9 +31,6 @@ function login(event) {
     const email = $('#login-email').val()
     const password = $('#login-password').val()
 
-    console.log('coba')
-    console.log(email, password)
-
     $.ajax({
         url: `${baseUrl}/users/login`,
         method: 'post',
@@ -90,11 +87,19 @@ function showIngredients() {
         <tr>
         <td>${totalIngredients[i]}</td>
         <td>${totalCalories[i]} cal</td>
-        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
+        <td><a class="btn-flat" href="#" onclick="deleteIngredient(event, ${i})"><i class="material-icons">delete</i></a></td>
         </tr>
         `
         $('#show-ingredients').append(addedIngredient)  
     }
+}
+
+function deleteIngredient(event, index) {
+    event.preventDefault()
+    totalIngredients.splice(index, 1)
+    totalCalories.splice(index, 1)
+    showIngredients()
+    showTotalCalories()
 }
 
 function showTotalCalories() {
@@ -105,5 +110,7 @@ function showTotalCalories() {
         showedTotalCalories += Number(totalCalories[i])
     }
 
-    $('#total-calories').append(showedTotalCalories)
+    let showUnit = `${showedTotalCalories} cal`
+
+    $('#total-calories').append(showUnit)
 }

@@ -98,14 +98,9 @@
     <!-- home -->
     <section id="home-page">
         <h1>Home</h1>
-        <button onclick="logout()">logout</button>
+        <button onclick="logout()">Logout</button>
     </section>
-
-    <!-- nutrition -->
-    <section id="nutrition-page">
-        <h3>Food</h3>
-        <p id="calorie-tag"></p>
-        <button onclick="fetchNutrition('egg')">Get Nutrition</button>
+    
     <br>
     <br>
     <br>
@@ -139,7 +134,7 @@
                     <div class="nav-wrapper">
                       <form onsubmit="addIngredient(event)">
                         <div class="input-field blue">
-                          <input id="search" type="search" id="input-ingredient" required>
+                          <input type="search" id="input-ingredient" required> 
                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                           <i class="material-icons">close</i>
                         </div>
@@ -165,12 +160,11 @@
                     </tbody>
                     <tr>
                         <td></td>
-                        <td><b>35 cal</b></td>
+                        <td><b id="total-calories"></b></td>
                         <td></td>
                     </tr>
                   </table>
 
-                  <input type="submit">
                   <a class="waves-effect waves-light btn right" style=" background-color: #f57f17 ;">Recommend Some Foods</a>
 
               </div>
@@ -179,9 +173,9 @@
     </section>
         
     <!-- LIST PNY RECIPES-->
-    <section id="login-page">
+    <section id="recipe-page">
     <p class="flow-text">List of Foods</p>
-    <h2 class="header">List of Foods</h2>
+    <h2 class="header" id="cobaDataRecipe">List of Foods</h2>
     <div class="card">
     <!-- <div class="card-panel hoverable"> -->
         <div class="card-image waves-effect waves-block waves-light">
@@ -200,7 +194,7 @@
     </section>
 
 
-    <section id="login-page">
+    <section id="restaurant-page">
         <div class="card">
             <!-- <div class="card-panel hoverable"> -->
 

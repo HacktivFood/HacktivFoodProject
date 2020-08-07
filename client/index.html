@@ -126,7 +126,7 @@
                 <p class="flow-text">Input Ingredients here</p>
                 <nav>
                     <div class="nav-wrapper">
-                      <form>
+                      <form onsubmit="addIngredients(event)">
                         <div class="input-field blue">
                           <input id="search" type="search" required>
                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -145,52 +145,13 @@
                       </tr> -->
                     </thead>
             
-                    <tbody>
-                      <tr>
-                        <td>Eclair</td>
-                        <td>5 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                        <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td>Jellybean</td>
-                        <td>10 cal</td>
-                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td><b>35 cal</b></td>
-                        <td></td>
-                      </tr>
+                    <tbody id="ingredients-container">
+            
                    
                     </tbody>
                   </table>
 
-                  <a class="waves-effect waves-light btn right" onclick="logout()" style=" background-color: #f57f17 ;">Recommend Some Foods</a>
+                  <a class="waves-effect waves-light btn right" onclick="fetchFoodRecipe(event)" style=" background-color: #f57f17 ;">Recommend Some Foods</a>
 
               </div>
             </div>
@@ -200,7 +161,7 @@
     <!-- LIST PNY RECIPES-->
     <section id="login-page">
     <p class="flow-text">List of Foods</p>
-    <h2 class="header">List of Foods</h2>
+    <h2 class="header" id="cobaDataRecipe">List of Foods</h2>
     <div class="card">
     <!-- <div class="card-panel hoverable"> -->
         <div class="card-image waves-effect waves-block waves-light">

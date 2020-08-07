@@ -1,5 +1,7 @@
 const baseUrl = `http://localhost:3000`
 
+let totalIngredients = ['banana'], totalCalories = [1]
+
 $(document).ready(function () {
     checkAuth()
 })
@@ -8,9 +10,15 @@ function checkAuth() {
     if (localStorage.getItem('token')) {
         $('#login-page').hide()
         $('#home-page').show()
+        $('#fetch-recipes').show()
+        showIngredients()
+        // $('#ingredients-page').show()
     } else {
         $('#login-page').show()
         $('#home-page').hide()
+        $('#fetch-recipes').hide()
+        showIngredients()
+        // $('#ingredients-page').hide()
     }
 }
 
@@ -38,9 +46,32 @@ function login(event) {
 }
 
 function logout() {
-    console.log('coba')
     localStorage.clear()
     checkAuth()
+}
+
+function addIngredient(event) {
+    event.preventDefault()
+    const ingredient = $('#input-ingredient').val()
+    totalIngredients.push(ingredient)
+
+    const calories = fetchNutrition(ingredient)
+    totalCalories.push(calories)
+}
+
+function showIngredients() {
+    console.log(totalIngredients, totalCalories)
+    for (let i = 0; i < totalIngredients.length; i++) {
+        let addedIngredient = 
+        `
+        <tr>
+        <td>Eclair${totalIngredients[i]}</td>
+        <td>${totalCalories[i]} cal</td>
+        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
+        </tr>
+        `
+        $('#show-ingredients').append(addedIngredient)
+    }
 }
 
 function fetchNutrition(food) {
@@ -52,9 +83,10 @@ function fetchNutrition(food) {
         }
     })
     .done((response) => {
-        console.log(response)
+        console.log(response.calories)
+        return response.calories
     })
     .fail((err) => {
         console.log(err)
     })
-}
+}   

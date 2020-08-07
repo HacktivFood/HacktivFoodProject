@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bulma": "^0.9.0",
     "live-server": "^1.2.1"
   }
 }

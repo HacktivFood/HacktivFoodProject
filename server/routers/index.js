@@ -10,7 +10,7 @@ const RecipeController = require('../controllers/recipeController')
 
 router.use('/users', usersRouter)
 
-// router.use(authentication)
+router.use(authentication)
 router.get('/restaurants', RestaurantsController.search)
 router.post('/recipes', RecipeController.getRecipe)
 

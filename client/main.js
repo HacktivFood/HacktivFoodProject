@@ -19,7 +19,6 @@ function checkAuth() {
         console.log('else')
         $('#login-page').show()
         $('#login-form').show()
-
         $('#ingredients-page').hide()
         $('#restaurants-page').hide()
     }
@@ -217,3 +216,21 @@ function fetchRestaurants(event) {
         console.log(err)
     })
 }
+
+function onSignIn(googleUser) {
+    let id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+        url: `${baseUrl}/users/googleSignIn`,
+        method: 'post',
+        data: {
+            id_token
+        }
+    })
+        .done(response => {
+            localStorage.setItem('token', response.token)
+            checkAuth()
+        })
+        .fail(err => {
+            console.log(err, 'errornya google sign in')
+        })
+  }

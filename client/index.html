@@ -43,8 +43,8 @@
         
                 <div class="row margin">
                     <div class="col s12 m12 l12 center">
-                        <img src="https://i.imgur.com/ypAbAYt.png"
-                         alt="" class="responsive-img circle" style="width:100px;">
+                        <img src="https://i.imgur.com/ypAbAYt.png">
+                         <alt="" class="responsive-img circle" style="width:100px;">
                         <p>Let's Login to HacktivFood Apps<br>And get some food recommendation for your tummy!!!</p>
                     </div>
                 </div>
@@ -95,6 +95,12 @@
         </form>
     </section>
 
+    <!-- home -->
+    <section id="home-page">
+        <h1>Home</h1>
+        <button onclick="logout()">Logout</button>
+    </section>
+    
     <br>
     <br>
     <br>
@@ -119,16 +125,16 @@
 
     <!-- SEARCH BAR -->
     <!-- Nav Section -->
-    <section id="login-page">
+    <section id="ingredients-page">
           <div class="row">
             <div class="col s12 m5">
               <div class="card-panel">
                 <p class="flow-text">Input Ingredients here</p>
                 <nav>
                     <div class="nav-wrapper">
-                      <form onsubmit="addIngredients(event)">
+                      <form onsubmit="addIngredient(event)">
                         <div class="input-field blue">
-                          <input id="search" type="search" required>
+                          <input type="search" id="input-ingredient" required> 
                           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                           <i class="material-icons">close</i>
                         </div>
@@ -145,13 +151,21 @@
                       </tr> -->
                     </thead>
             
-                    <tbody id="ingredients-container">
-            
-                   
+                    <tbody id="show-ingredients">
+                      <tr>
+                        <td>Eclair</td>
+                        <td>5 cal</td>
+                        <td><a class="btn-flat" href="#"><i class="material-icons">delete</i></a></td>
+                      </tr>
                     </tbody>
+                    <tr>
+                        <td></td>
+                        <td><b id="total-calories"></b></td>
+                        <td></td>
+                    </tr>
                   </table>
 
-                  <a class="waves-effect waves-light btn right" onclick="fetchFoodRecipe(event)" style=" background-color: #f57f17 ;">Recommend Some Foods</a>
+                  <a class="waves-effect waves-light btn right" style=" background-color: #f57f17 ;">Recommend Some Foods</a>
 
               </div>
             </div>
@@ -159,7 +173,7 @@
     </section>
         
     <!-- LIST PNY RECIPES-->
-    <section id="login-page">
+    <section id="recipe-page">
     <p class="flow-text">List of Foods</p>
     <h2 class="header" id="cobaDataRecipe">List of Foods</h2>
     <div class="card">
@@ -180,7 +194,7 @@
     </section>
 
 
-    <section id="login-page">
+    <section id="restaurant-page">
         <div class="card">
             <!-- <div class="card-panel hoverable"> -->
 

@@ -1,6 +1,6 @@
 const baseUrl = `http://localhost:3000`
 
-let totalIngredients = [], totalCalories = []
+let totalIngredients = [], totalCalories = [], foodContainer = ''
 
 $(document).ready(function () {
     checkAuth()
@@ -8,21 +8,20 @@ $(document).ready(function () {
 
 function checkAuth() {
     if (localStorage.getItem('token')) {
+        console.log('token')
         $('#login-page').hide()
-        $('#home-page').show()
-        $('#fetch-recipes').show()
+        $('#login-form').hide()
         showIngredients()
         showTotalCalories()
         $('#ingredients-page').show()
-        $('#recipe-page').hide()
-        $('#restaurant-page').hide()
+        $('#restaurants-page').hide()
     } else {
+        console.log('else')
         $('#login-page').show()
-        $('#home-page').hide()
-        $('#fetch-recipes').hide()
+        $('#login-form').show()
+
         $('#ingredients-page').hide()
-        $('#recipe-page').hide()
-        $('#restaurant-page').hide()
+        $('#restaurants-page').hide()
     }
 }
 
@@ -43,6 +42,27 @@ function login(event) {
             console.log(response)
             localStorage.setItem('token', response.token)
             checkAuth()
+        })
+        .fail((err) => {
+            console.log(err)
+        })
+}
+
+function register(event) {
+    event.preventDefault()
+    const email = $('#register-email').val()
+    const password = $('#register-password').val()
+
+    $.ajax({
+        url: `${baseUrl}/users/register`,
+        method: 'post',
+        data: {
+            email,
+            password
+        }
+    })
+        .done((response) => {
+            console.log(response)
         })
         .fail((err) => {
             console.log(err)
@@ -113,4 +133,87 @@ function showTotalCalories() {
     let showUnit = `${showedTotalCalories} cal`
 
     $('#total-calories').append(showUnit)
+}
+
+function fetchFood () {
+    $.ajax({
+        url : `${baseUrl}/recipes`,
+        method : 'post',
+        data : {ingredients : JSON.stringify(totalIngredients)}
+    })
+    .done((response) => {
+        console.log(response)
+        $('#recipe-list').empty()
+        response.recipe.forEach(element => {
+            let uniqueRecipe = 
+            `
+            <div class="col">
+                <div class="card text-left mt-3">
+                <div class="card-header">
+                    <span id="">${element.title}</span>
+                </div>
+                <div class="card-body row">
+                    <div class="col-3">
+                    <img src="${element.image}" height="100vh" alt="">
+                    </div>
+                    <div class="col-9">
+                    <p class="card-text">${element.title}</p>
+                    <a href="#" id="find-nearby" class="btn btn-outline-success" onclick="toRestaurants(event, '${element.title}')">Find nearby restaurants</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            `
+            $('#recipe-list').append(uniqueRecipe)
+        })
+    })
+    .fail((err) => {
+        console.log(err)
+    })
+}
+
+// /restaurants?address=slipi tower&keyword=Apple Crumble Recipe
+
+function toRestaurants (event, foodName) {
+    event.preventDefault()
+    $('#restaurants-page').show()
+    $('#ingredients-page').hide()
+    foodContainer = foodName
+}
+
+function fetchRestaurants(event) {
+    const address = $('#address').val()
+    event.preventDefault()
+    $.ajax({
+        url : `${baseUrl}/restaurants?address=${address}&keyword=${foodContainer}`,
+        method : 'get'
+    })
+    .done((response) => {
+        $('#restaurant-container').empty()
+        console.log(response)
+        response.forEach(element => {
+            let restaurantTemplate = 
+            `
+            <div class="col">
+            <div class="card text-left mt-3">
+              <div class="card-header">
+                <span id="">${element.restaurant.name}</span>
+              </div>
+              <div class="card-body row">
+                <div class="col-3">
+                  <img src="${element.restaurant.thumb}" height="100vh" alt="">
+                </div>
+                <div class="col-9">
+                  <p class="card-text">${element.restaurant.location.address}</p>
+                </div>
+              </div>
+            </div>
+            </div>
+            `
+            $('#restaurant-container').append(restaurantTemplate)
+        })
+    })
+    .fail((err) => {
+        console.log(err)
+    })
 }

@@ -12,7 +12,7 @@ router.use('/users', usersRouter)
 
 // router.use(authentication)
 router.get('/restaurants', RestaurantsController.search)
-router.get('/recipes', RecipeController.getRecipe)
+router.post('/recipes', RecipeController.getRecipe)
 
 router.use('/nutrition', nutritionRouter)
 

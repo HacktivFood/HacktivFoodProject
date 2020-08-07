@@ -20,7 +20,14 @@
     <!-- home -->
     <section id="home-page">
         <h1>Home</h1>
-        <button onsubmit="logout()">logout</button>
+        <button onclick="logout()">logout</button>
+    </section>
+
+    <!-- nutrition -->
+    <section id="nutrition-page">
+        <h3>Food</h3>
+        <p id="calorie-tag"></p>
+        <button onclick="fetchNutrition('egg')">Get Nutrition</button>
     </section>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

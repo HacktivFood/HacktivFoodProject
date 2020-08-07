@@ -38,6 +38,23 @@ function login(event) {
 }
 
 function logout() {
+    console.log('coba')
     localStorage.clear()
     checkAuth()
+}
+
+function fetchNutrition(food) {
+    $.ajax({
+        url: `${baseUrl}/nutrition/${food}`,
+        method: 'get',
+        headers: {
+            token: localStorage.token
+        }
+    })
+    .done((response) => {
+        console.log(response)
+    })
+    .fail((err) => {
+        console.log(err)
+    })
 }
